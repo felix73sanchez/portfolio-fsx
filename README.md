@@ -2,7 +2,7 @@
 
 Portfolio profesional de Felix Sánchez, Ingeniero de Software especializado en desarrollo backend con .NET/C# y Java/Spring Boot.
 
-🌐 **[Ver Demo en Vivo](http://fsxsys.dpdns.org)**
+🌐 **[Ver en Vivo](https://fsxsys.dpdns.org)**
 
 ## 🚀 Tecnologías
 
@@ -56,16 +56,37 @@ npm run preview
 
 ## 🐳 Docker
 
+### Desarrollo Local
 ```bash
 # Build de la imagen
 docker build -t portfolio-fsx .
 
-# Ejecutar con docker-compose
+# Ejecutar contenedor simple (sin SSL)
+docker run -d -p 8080:80 --name portfolio portfolio-fsx
+```
+
+### Producción con HTTPS
+```bash
+# Deploy completo con SSL automático
 docker-compose up -d
 
 # Ver logs
 docker-compose logs -f
+
+# Ver estado de Let's Encrypt
+docker logs letsencrypt
+
+# Ver certificados generados
+docker exec nginx-proxy ls -la /etc/nginx/certs/
 ```
+
+**Características:**
+- ✅ SSL/TLS automático con Let's Encrypt
+- ✅ Renovación automática cada 60 días
+- ✅ Redirección HTTP → HTTPS
+- ✅ HSTS y headers de seguridad
+
+📖 **[Ver guía completa de HTTPS](./HTTPS-SETUP.md)**
 
 ## 📝 Contenido del Portfolio
 
@@ -76,13 +97,28 @@ docker-compose logs -f
 
 ## 🚢 Despliegue
 
-El proyecto incluye un pipeline de CI/CD completo:
+El proyecto incluye un pipeline de CI/CD completo con **HTTPS automático**:
 
 1. **Lint & Test** - Validación de código
 2. **Build** - Compilación de la aplicación
 3. **Docker Build** - Construcción de imagen optimizada
 4. **Security Scan** - Análisis de vulnerabilidades con Trivy
-5. **Deploy** - Despliegue automático a producción
+5. **Deploy** - Despliegue automático con:
+   - Nginx Proxy reverso
+   - Let's Encrypt SSL/TLS automático
+   - Renovación automática de certificados
+
+### Arquitectura de Producción
+
+```
+Internet (HTTPS) → Nginx Proxy (puerto 443) 
+                    ↓
+                  Let's Encrypt (gestión SSL)
+                    ↓
+                  Portfolio Container (puerto 80)
+```
+
+📖 **[Guía de configuración AWS + HTTPS](./HTTPS-SETUP.md)**
 
 ## 📧 Contacto
 
