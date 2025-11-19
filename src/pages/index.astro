@@ -1,0 +1,322 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Felix Sánchez | Desarrollador Full Stack">
+  <section class="hero container">
+    <h1>Felix Sánchez</h1>
+    <p class="subtitle">Bachelor's degree in information technology | Developer</p>
+    <p class="location">📍 Santo Domingo, República Dominicana</p>
+    
+    <div class="contact">
+      <a href="mailto:felixsanchez73@outlook.com">✉️ felixsanchez73@outlook.com</a>
+      <span class="separator">•</span>
+      <a href="tel:+18094050876">📞 +1(809)-405-0876</a>
+      <span class="separator">•</span>
+      <a href="https://www.linkedin.com/in/felixrsanchez/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="separator">•</span>
+      <a href="https://github.com/felix73sanchez" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2>Sobre Mí</h2>
+    <p>Ingeniero de software especializado en desarrollo backend con <strong>.NET/C#</strong> y <strong>Java/Spring Framework</strong>, con sólida experiencia en <strong>Oracle Database</strong> (PL/SQL, procedimientos almacenados, optimización de queries). Experto en crear soluciones empresariales y robustas, diseñando APIs escalables y sistemas de alta disponibilidad. Apasionado por la tecnologia, arquitecturas limpias y buenas prácticas de desarrollo.</p>
+  </section>
+
+  <section class="section container">
+    <h2>Experiencia</h2>
+    
+    <div class="experience-item">
+      <div class="exp-header">
+        <h3>Ingeniero de Software</h3>
+        <span class="date">Oct 2025 – Presente</span>
+      </div>
+      <p class="company">Asociación La Nacional • Santo Domingo, RD</p>
+      <ul>
+        <li>Desarrollo de reportes dinámicos solicitados por usuarios internos de la institución</li>
+        <li>Mantenimiento y optimización de procedimientos almacenados en Oracle Database</li>
+        <li>Mejora continua de procesos de generación de reportes empresariales</li>
+      </ul>
+    </div>
+
+    <div class="experience-item">
+      <div class="exp-header">
+        <h3>Desarrollador</h3>
+        <span class="date">Oct 2023 – Sep 2025</span>
+      </div>
+      <p class="company">Banco BDI • Santo Domingo, RD</p>
+      <ul>
+        <li>Desarrollé e implementé transacciones para el Core Bancario usando PL/SQL y Oracle Forms</li>
+        <li>Diseñé y desarrollé sistema de envío masivo de estados de cuenta con NestJS</li>
+        <li>Mantuve y desarrollé mejoras del Middleware empresarial con C#/.NET, Java/Spring y Node.js</li>
+        <li>Creé reportes para organismos reguladores usando Oracle Reports, SSRS, Crystal Reports y Jasper</li>
+        <li>Gestioné repositorios de código fuente mediante Git, GitHub y BitBucket</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2>Habilidades Técnicas</h2>
+    
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h4>Lenguajes</h4>
+        <div class="tags">
+          <span>Java</span>
+          <span>C#</span>
+          <span>JavaScript</span>
+          <span>TypeScript</span>
+          <span>PL-SQL</span>
+          <span>Python</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h4>Frameworks</h4>
+        <div class="tags">
+          <span>Spring Boot</span>
+          <span>.NET</span>
+          <span>NestJS</span>
+          <span>Next.js</span>
+          <span>Angular</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h4>Bases de Datos</h4>
+        <div class="tags">
+          <span>Oracle</span>
+          <span>MS SQL Server</span>
+          <span>PostgreSQL</span>
+          <span>SQLite</span>
+          <span>Redis</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h4>DevOps & Tools</h4>
+        <div class="tags">
+          <span>Git</span>
+          <span>Docker</span>
+          <span>CI/CD</span>
+          <span>Azure DevOps</span>
+          <span>Postman</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2>Proyectos Destacados</h2>
+    
+    <div class="project-item">
+      <h3>Sistema de Envío Masivo de Estados de Cuenta</h3>
+      <p class="tech">NestJS • TypeScript • Oracle • Redis</p>
+      <p>Desarrollé un sistema automatizado para envío masivo de estados de cuenta de ahorros, procesando miles de mensualmente con alta confiabilidad.</p>
+    </div>
+
+    <div class="project-item">
+      <h3>Middleware de Integración Bancaria</h3>
+      <p class="tech">C#/.NET • Java/Spring Framework • Node.js • Oracle</p>
+      <p>Mantuve y desarrollé mejoras para el middleware que conecta diferentes sistemas del banco, garantizando la integridad de las transacciones.</p>
+    </div>
+
+    <div class="project-item">
+      <h3>Reportes Regulatorios</h3>
+      <p class="tech">Oracle Reports • SSRS • Crystal Reports • PL/SQL</p>
+      <p>Creé reportes complejos para entidades reguladoras (SIB, BCRD), asegurando el cumplimiento normativo del banco.</p>
+    </div>
+  </section>
+
+  <section class="section container">
+    <h2>Educación</h2>
+    <div class="education-item">
+      <h3>Licenciatura en Tecnologias de la Información</h3>
+      <p class="institution">Universidad del Caribe</p>
+    </div>
+  </section>
+
+  <section class="cta container">
+    <h2>¿Interesado en colaborar?</h2>
+    <p>Siempre abierto a nuevos desafíos y oportunidades de desarrollo. ¡Hablemos!</p>
+    <a href="mailto:felixsanchez73@outlook.com" class="cta-button">Contactar</a>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    padding: 4rem 0 3rem;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+
+  .location {
+    color: var(--gray);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .separator {
+    color: var(--gray);
+  }
+
+  .section {
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section h2 {
+    margin-bottom: 2rem;
+  }
+
+  .section p {
+    color: var(--gray);
+    margin-bottom: 1rem;
+  }
+
+  .experience-item, .project-item, .education-item {
+    margin-bottom: 2.5rem;
+  }
+
+  .experience-item:last-child, .project-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .exp-header h3 {
+    margin: 0;
+  }
+
+  .date {
+    color: var(--gray);
+    font-size: 0.9rem;
+  }
+
+  .company, .institution {
+    color: var(--gray);
+    margin-bottom: 0.75rem;
+  }
+
+  .experience-item ul, .project-item ul {
+    margin-left: 1.5rem;
+    color: var(--gray);
+  }
+
+  .experience-item li, .project-item li {
+    margin-bottom: 0.5rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-category h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tags span {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--light-gray);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--fg);
+  }
+
+  .tech {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+  }
+
+  .cta {
+    text-align: center;
+    padding: 4rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .cta h2 {
+    margin-bottom: 1rem;
+  }
+
+  .cta p {
+    color: var(--gray);
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: var(--fg);
+    color: var(--bg);
+    border-radius: 8px;
+    font-weight: 500;
+    transition: transform 0.2s;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 2rem 0 1.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .contact {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .separator {
+      display: none;
+    }
+
+    .exp-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

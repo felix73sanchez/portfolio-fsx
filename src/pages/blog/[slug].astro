@@ -1,0 +1,254 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post: any) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat('es-DO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
+}
+---
+
+<Layout title={`${post.data.title} | Felix Sánchez`} description={post.data.description}>
+  <article class="container post-content">
+    <header class="post-header">
+      <a href="/blog" class="back-link">← Volver al blog</a>
+      <div class="post-meta">
+        <time class="post-date">{formatDate(post.data.date)}</time>
+        {post.data.tags && (
+          <div class="post-tags">
+            {post.data.tags.map((tag: string) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+      <h1>{post.data.title}</h1>
+      <p class="lead">{post.data.description}</p>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <footer class="post-footer">
+      <a href="/blog" class="back-link-bottom">← Volver al blog</a>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .post-content {
+    padding: 3rem 0 4rem;
+    max-width: 700px;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--gray);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--fg);
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .post-date {
+    display: block;
+    color: var(--gray);
+    font-size: 0.95rem;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    background: var(--light-gray);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--gray);
+  }
+
+  .post-header h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .lead {
+    font-size: 1.15rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  .prose {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--gray);
+  }
+
+  .prose :global(h1),
+  .prose :global(h2),
+  .prose :global(h3),
+  .prose :global(h4) {
+    color: var(--fg);
+  }
+
+  .prose :global(h2) {
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose :global(h4) {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose :global(strong) {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .prose :global(a) {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--border);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--gray);
+    font-style: italic;
+  }
+
+  .prose :global(pre) {
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+  }
+
+  .prose :global(code) {
+    font-size: 0.9em;
+  }
+
+  .prose :global(img) {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+  }
+
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .post-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .back-link-bottom {
+    display: inline-block;
+    color: var(--gray);
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  .back-link-bottom:hover {
+    color: var(--fg);
+  }
+
+  @media (max-width: 640px) {
+    .post-content {
+      padding: 2rem 0 3rem;
+    }
+
+    .post-header h1 {
+      font-size: 2rem;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+    }
+
+    .prose {
+      font-size: 1rem;
+    }
+
+    .prose :global(h2) {
+      font-size: 1.5rem;
+    }
+
+    .prose :global(h3) {
+      font-size: 1.25rem;
+    }
+
+    .post-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

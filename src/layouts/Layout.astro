@@ -1,0 +1,270 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Desarrollador Full Stack | Java, .NET, Node.js" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style is:global>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --fg: #0a0a0a;
+      --gray: #6b7280;
+      --light-gray: #f3f4f6;
+      --border: #e5e7eb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a;
+        --fg: #fafafa;
+        --gray: #9ca3af;
+        --light-gray: #1f1f1f;
+        --border: #262626;
+      }
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a {
+      color: var(--fg);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    a:hover {
+      opacity: 0.7;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.875rem; margin-bottom: 1rem; }
+    h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+    code {
+      font-family: 'Courier New', monospace;
+      background: var(--light-gray);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background: var(--light-gray);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="container">
+      <div class="nav-content">
+        <a href="/" class="logo">
+          <span class="logo-bracket">&lt;</span>
+          <span class="logo-text">FSX</span>
+          <span class="logo-bracket">/&gt;</span>
+        </a>
+        <div class="nav-links">
+          <a href="/" class="nav-link">
+            <span class="nav-number">01.</span>
+            <span>Inicio</span>
+          </a>
+          <a href="/proyectos" class="nav-link">
+            <span class="nav-number">02.</span>
+            <span>Proyectos</span>
+          </a>
+          <a href="/blog" class="nav-link">
+            <span class="nav-number">03.</span>
+            <span>Blog</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} Felix Sánchez. Santo Domingo, RD.</p>
+    </div>
+  </footer>
+
+  <style>
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(10, 10, 10, 0.8);
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    @media (prefers-color-scheme: light) {
+      .header {
+        background: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .logo-bracket {
+      color: #3b82f6;
+      font-weight: 700;
+    }
+
+    .logo-text {
+      margin: 0 0.25rem;
+      color: var(--fg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-number {
+      color: #3b82f6;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #3b82f6;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .nav-link:hover .nav-number {
+      color: #60a5fa;
+    }
+
+    .footer {
+      margin-top: 6rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer p {
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      .header {
+        padding: 0.75rem 0;
+      }
+
+      .logo {
+        font-size: 1.1rem;
+      }
+
+      .nav-links {
+        gap: 1.25rem;
+      }
+
+      .nav-link {
+        font-size: 0.85rem;
+        gap: 0.25rem;
+      }
+
+      .nav-number {
+        font-size: 0.7rem;
+      }
+
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+    }
+  </style>
+</body>
+</html>
