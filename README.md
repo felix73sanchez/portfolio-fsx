@@ -2,7 +2,7 @@
 
 Portfolio profesional de Felix Sánchez, Ingeniero de Software especializado en desarrollo backend con .NET/C# y Java/Spring Boot.
 
-🌐 **[Ver Demo en Vivo](https://felixsanchez.dev)**
+🌐 **[Ver Demo en Vivo](http://fsxsys.dpdns.org)**
 
 ## 🚀 Tecnologías
 
