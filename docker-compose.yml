@@ -34,7 +34,9 @@ services:
       - nginx-proxy
 
   portfolio:
-    build: .
+    image: ghcr.io/felix73sanchez/portfolio-fsx:latest
+    # Para desarrollo local, comenta la línea de arriba y descomenta la siguiente:
+    # build: .
     expose:
       - "80"
     environment:
