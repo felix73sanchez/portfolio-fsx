@@ -12,8 +12,8 @@ RUN npm run build && rm -rf node_modules
 # Stage 2: Production
 FROM nginx:alpine
 
-# Security updates
-RUN apk update && apk upgrade && rm -rf /var/cache/apk/*
+# Security updates and install wget for healthcheck
+RUN apk update && apk upgrade && apk add --no-cache wget && rm -rf /var/cache/apk/*
 
 # Copy built files
 COPY --from=builder /app/dist /usr/share/nginx/html
