@@ -125,4 +125,3 @@ public class OracleAccountRepository implements AccountGateway {
 
 Para sistemas críticos como los bancarios, donde el costo de errores es alto y los requisitos cambian frecuentemente, Clean Architecture es una inversión que vale la pena.
 
-La clave es aplicar pragmatismo: usa estas ideas donde aportan valor real.
