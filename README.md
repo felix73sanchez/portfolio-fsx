@@ -2,16 +2,17 @@
 
 Portfolio profesional de Felix Sánchez, Ingeniero de Software especializado en desarrollo backend con .NET/C# y Java/Spring Boot.
 
-🌐 **[Ver en Vivo](https://fsxsys.dpdns.org)**
+🌐 **[Ver en Vivo](https://tu-portfolio.vercel.app)**
 
 ## 🚀 Tecnologías
 
 - **Framework:** Astro 4.0
 - **Lenguaje:** TypeScript
 - **Contenido:** MDX (Markdown + React)
+- **CMS:** Decap CMS (panel de administración)
 - **Estilos:** CSS Vanilla con Custom Properties
-- **Deploy:** Docker + Nginx
-- **CI/CD:** GitHub Actions
+- **Deploy:** Vercel
+- **Git:** GitHub
 
 ## 📁 Estructura del Proyecto
 

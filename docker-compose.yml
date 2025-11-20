@@ -1,7 +1,0 @@
-services:
-  portfolio:
-    image: ghcr.io/felix73sanchez/portfolio-fsx:latest
-    ports:
-      - "80:80"
-    restart: unless-stopped
-    container_name: felix-portfolio

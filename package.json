@@ -9,7 +9,10 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^4.0.0",
-    "@astrojs/mdx": "^2.0.0"
+    "@astrojs/mdx": "^2.0.0",
+    "astro": "^4.0.0"
+  },
+  "devDependencies": {
+    "netlify-cms-app": "^2.15.72"
   }
 }
