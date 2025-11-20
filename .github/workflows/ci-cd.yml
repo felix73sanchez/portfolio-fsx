@@ -149,7 +149,7 @@ jobs:
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     environment:
       name: production
-      url: https://fsxsys.dpdns.org
+      url: http://fsxsys.dpdns.org
     
     steps:
       - name: Checkout code
@@ -163,77 +163,9 @@ jobs:
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            # Instalar Docker Compose si no existe
-            if ! command -v docker-compose &> /dev/null; then
-              echo "Installing Docker Compose..."
-              sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-              sudo chmod +x /usr/local/bin/docker-compose
-              docker-compose --version
-            fi
-            
             # Crear directorio si no existe
             mkdir -p ~/portfolio
             cd ~/portfolio
-            
-            # Copiar docker-compose.yml
-            cat > docker-compose.yml << 'EOF'
-            version: '3.8'
-
-            services:
-              nginx-proxy:
-                image: jwilder/nginx-proxy:latest
-                container_name: nginx-proxy
-                ports:
-                  - "80:80"
-                  - "443:443"
-                volumes:
-                  - /var/run/docker.sock:/tmp/docker.sock:ro
-                  - nginx-certs:/etc/nginx/certs:ro
-                  - nginx-vhost:/etc/nginx/vhost.d
-                  - nginx-html:/usr/share/nginx/html
-                restart: unless-stopped
-                networks:
-                  - proxy-network
-
-              letsencrypt:
-                image: jrcs/letsencrypt-nginx-proxy-companion:latest
-                container_name: letsencrypt
-                volumes:
-                  - /var/run/docker.sock:/var/run/docker.sock:ro
-                  - nginx-certs:/etc/nginx/certs
-                  - nginx-vhost:/etc/nginx/vhost.d
-                  - nginx-html:/usr/share/nginx/html
-                environment:
-                  - DEFAULT_EMAIL=felix73sanchez@gmail.com
-                  - NGINX_PROXY_CONTAINER=nginx-proxy
-                restart: unless-stopped
-                networks:
-                  - proxy-network
-                depends_on:
-                  - nginx-proxy
-
-              portfolio:
-                image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-                expose:
-                  - "80"
-                environment:
-                  - VIRTUAL_HOST=fsxsys.dpdns.org
-                  - LETSENCRYPT_HOST=fsxsys.dpdns.org
-                  - LETSENCRYPT_EMAIL=felix73sanchez@gmail.com
-                restart: unless-stopped
-                container_name: felix-portfolio
-                networks:
-                  - proxy-network
-
-            volumes:
-              nginx-certs:
-              nginx-vhost:
-              nginx-html:
-
-            networks:
-              proxy-network:
-                driver: bridge
-            EOF
             
             # Login a GitHub Container Registry
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -241,11 +173,19 @@ jobs:
             # Pull latest image
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             
-            # Deploy con docker-compose
-            docker-compose down 2>/dev/null || true
-            docker-compose up -d
+            # Stop y remove container anterior si existe
+            docker stop felix-portfolio 2>/dev/null || true
+            docker rm felix-portfolio 2>/dev/null || true
+            
+            # Run nuevo container
+            docker run -d \
+              --name felix-portfolio \
+              --restart unless-stopped \
+              -p 80:80 \
+              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             
             # Cleanup imagenes antiguas
+            docker image prune -f
             docker image prune -f
 
       - name: Health check
@@ -258,7 +198,7 @@ jobs:
         run: |
           echo "✅ Deployment successful!"
           echo "🚀 Portfolio deployed to AWS EC2"
-          echo "📍 URL: https://fsxsys.dpdns.org"
+          echo "📍 URL: http://fsxsys.dpdns.org"
 
       - name: Rollback on failure
         if: failure()
