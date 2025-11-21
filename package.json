@@ -6,13 +6,11 @@
     "dev": "astro dev --host",
     "start": "astro dev --host",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "new-post": "node create-post.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.0",
     "astro": "^4.0.0"
-  },
-  "devDependencies": {
-    "netlify-cms-app": "^2.15.72"
   }
 }
